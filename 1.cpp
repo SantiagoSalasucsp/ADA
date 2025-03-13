@@ -5,11 +5,19 @@ using namespace std;
 
 struct Vector
 {
+       
         int* m_pVect, // Pointer to the buffer
         m_nCount, // Control how many elements are actually used
         m_nMax, // Control how many are allocated as maximum
         m_nDelta; // To control the growing
 };
+
+
+void constructior(int*& m, int& m1,int& m2,int& m3, int& m4) {
+    
+
+
+}
 
 void Resize(int*& Vect, int& Max)
 {
