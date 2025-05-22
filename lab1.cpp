@@ -1,3 +1,10 @@
+//integrantes
+    //Santiago Salas Sotillo 
+    //Adrian Alvarez Minaya
+
+
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
