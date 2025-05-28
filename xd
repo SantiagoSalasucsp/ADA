@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int knapsack(int W, vector<int>& weights, vector<int>& values, int n) {
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        for (int w = 1; w <= W; w++) {
+            if (weights[i-1] <= w) {
+                dp[i][w] = max(values[i-1] + dp[i-1][w-weights[i-1]], dp[i-1][w]);
+            } else {
+                dp[i][w] = dp[i-1][w];
+            }
+        }
+    }
+
+    return dp[n][W];
+}
+
+int main() {
+    int W = 50; // Capacidad máxima de la mochila
+    vector<int> values = {60, 100, 120}; // Valores de los items
+    vector<int> weights = {10, 20, 30}; // Pesos de los items
+    int n = values.size();
+
+    cout << "Valor máximo que se puede llevar en la mochila: " 
+         << knapsack(W, weights, values, n) << endl;
+
+    return 0;
+}
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <climits>
+#include <algorithm>
+
+using namespace std;
+
+int minCoins(vector<int>& coins, int amount) {
+    vector<int> dp(amount + 1, INT_MAX);
+    dp[0] = 0;
+
+    for (int i = 1; i <= amount; i++) {
+        for (int coin : coins) {
+            if (coin <= i && dp[i - coin] != INT_MAX) {
+                dp[i] = min(dp[i], dp[i - coin] + 1);
+            }
+        }
+    }
+
+    return dp[amount] == INT_MAX ? -1 : dp[amount];
+}
+
+int main() {
+    vector<int> coins = {1, 5, 10, 25}; // Denominaciones de monedas
+    int amount = 37; // Cantidad a cambiar
+
+    int result = minCoins(coins, amount);
+    if (result != -1) {
+        cout << "Número mínimo de monedas necesarias: " << result << endl;
+    } else {
+        cout << "No es posible hacer el cambio con las monedas dadas." << endl;
+    }
+
+    return 0;
+}
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int countCombinations(vector<int>& coins, int amount) {
+    vector<int> dp(amount + 1, 0);
+    dp[0] = 1;
+
+    for (int coin : coins) {
+        for (int i = coin; i <= amount; i++) {
+            dp[i] += dp[i - coin];
+        }
+    }
+
+    return dp[amount];
+}
+
+int main() {
+    vector<int> coins = {1, 2, 5}; // Denominaciones de monedas
+    int amount = 5; // Cantidad a cambiar
+
+    cout << "Número de combinaciones posibles: " 
+         << countCombinations(coins, amount) << endl;
+
+    return 0;
+}
+
