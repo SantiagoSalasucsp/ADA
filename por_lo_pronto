@@ -1,0 +1,106 @@
+#include <iostream>
+#include <set>
+#include <map>
+#include <vector>
+using namespace std;
+
+int main() {
+    map<int, set<map<int,int>>> mapaOrdenado;
+
+     mapaOrdenado[0].insert({ {1, 7} });
+     mapaOrdenado[0].insert({ {2, 15} });
+     mapaOrdenado[0].insert({ {4, 10} });
+
+     mapaOrdenado[1].insert({ {3, 9} });
+     mapaOrdenado[1].insert({ {7, 12} });
+     mapaOrdenado[1].insert({ {6, 5} });
+     mapaOrdenado[1].insert({ {0, 7} });
+
+     mapaOrdenado[2].insert({ {0, 15} });
+
+
+     mapaOrdenado[3].insert({ {1, 9} });
+
+
+     mapaOrdenado[4].insert({ {0, 10} });
+     mapaOrdenado[4].insert({ {6, 8} });
+     mapaOrdenado[4].insert({ {5, 3} });
+
+     mapaOrdenado[5].insert({ {6, 14} });
+     mapaOrdenado[5].insert({ {4, 3} });
+
+
+     mapaOrdenado[6].insert({ {7, 6} });
+     mapaOrdenado[6].insert({ {1, 5} });
+     mapaOrdenado[6].insert({ {4, 8} });
+     mapaOrdenado[6].insert({ {5, 14} });
+
+     mapaOrdenado[7].insert({ {6, 6} });
+     mapaOrdenado[7].insert({ {1, 12} });
+
+
+     set<map<int, int>> q;
+     
+
+     for (const auto& map_element : q) { 
+         cout << "map: ";
+         for (const auto& pair : map_element) { 
+             cout << "(" << pair.first << ", " << pair.second << ") ";
+         }
+         cout << endl;
+     }
+    
+
+  
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+https://aprende.olimpiada-informatica.org/algoritmia-minimum-spanning-tree-prim-kruskal
+
+
+
+// Dados un grafo G, sus pesos W y el número de nodos n devuelve el coste del árbol mínimo
+// generador usando el algoritmo de Prim
+int Prim (vvi& G, vvi& W, int n){
+    vector <bool> vis(n, false); //nodos visitados, inicialmente ninguno
+    priority_queue <ii> Q; //cola de prioridad de parejas de enteros (-distancia del nodo a F, nodo)
+    Q.push({-0,0}); //introducimos un nodo cualquiera (a distancia 0 de él mismo)
+    int answer = 0; 
+
+    while (not Q.empty()){
+        ii arc = Q.top() //arco con menor peso desde F hasta G\F 
+        Q.pop(); //lo quitamos de la cola
+
+        int v = arc.second; //vértice de Q a menor distancia de F
+        int p = -arc.first; //distancia entre F y v
+
+        if (not vis[v]){ //si no lo hemos visitado
+            vis[v] = true;
+            answer += p;
+
+            for (int i = 0; i < G[v].size(); ++i){ //miramos sus vecinos
+                int u = G[v][i];
+                int w = W[v][i];
+
+                Q.push({-w, u}); // añadimos los vecinos conectados con u
+            }
+        }   
+    }
+
+    return answer; // devolvemos el coste
+}
+
+
+
+https://www.google.com/search?q=prim+cormen+algoritmos+ppt&sca_esv=723c346dfe62eecb&rlz=1C1CHBD_esPE1067PE1067&biw=1920&bih=919&ei=HJFDaIPpKYGSwbkPrPvyyQQ&ved=0ahUKEwiD5-_nj96NAxUBSTABHay9PEkQ4dUDCBA&uact=5&oq=prim+cormen+algoritmos+ppt&gs_lp=Egxnd3Mtd2l6LXNlcnAiGnByaW0gY29ybWVuIGFsZ29yaXRtb3MgcHB0MgUQIRigATIFECEYoAEyBRAhGKABMgUQIRigATIFECEYnwVI7QlQvwRY7QhwAXgBkAEAmAGJAqABjASqAQMyLTK4AQPIAQD4AQGYAgOgApUEwgIKEAAYsAMY1gQYR5gDAIgGAZAGCJIHBTEuMC4yoAeNCrIHAzItMrgHkQTCBwUwLjIuMcgHBg&sclient=gws-wiz-serp
